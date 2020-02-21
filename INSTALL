@@ -1,0 +1,11 @@
+You need few library to compile. They are:
+  libtermcap
+  libncurses
+
+How to build:
+  # ./configure
+  # make
+
+How to install:
+  # make install
+

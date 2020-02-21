@@ -1,0 +1,44 @@
+# ---------------------------------------------------------------------
+#
+#  Binary editor(hi)'s environment definition. This file is sample.
+#  please copy your home directory and modified.
+#
+# ---------------------------------------------------------------------
+#
+# :set TR=(a/e/s)      character-area language.
+#    default=a           a   : (ascii)        
+#                        e   : (japanese-euc)
+#                        s   : (shift-jis)
+#                        j   : (jis)
+#                        bi  : (ebcdic ibm)
+#                        bh  : (ebcdik hitachi)
+#                        bn  : (ebcdic nec)
+#                        bo  : (ebcdic)
+#
+# :set CP=(h/c)        cursor-position.
+#    default=h           h   : (hex-area)
+#                        c   : (character-area)
+#
+# :set SR=(on/off)     reverse search-string.
+#    default=on          on  : (reverse search-string)
+#                        off : (not reverse)
+#
+# :set EO=(on/off)     when abort, report to environment
+#    default=on          on  : (report to environment)
+#                        off : (not report to environment)
+#
+# :set AS=size         allocate size of workarea.
+#    defalut=1024
+#
+# :set MS=size         max allocate size of workarea.
+#    defalut=none        workarea is dynamic allocation. If max
+#                        allocate size definition, hi not get over
+#                        this size to allocate.
+#
+# ---------------------------------------------------------------------
+:set TR=a
+:set CP=h
+:set SR=on
+:set EO=on
+:set AS=1024
+:set MS=2147483647

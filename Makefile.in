@@ -1,0 +1,52 @@
+#!/bin/sh
+# ======================================================================
+#   Makefile ( hi - binary editor )
+#       Copyright (c) 1998-2000 Kazunori Mita. All right reserved.
+#       Copyright (c) 2004-2006 Tatsuyoshi
+#  ---------------------------------------------------------------------
+#  @(#) Author  : Kazunori Mita (mita@maroon.plala.or.jp)
+#  @(#) Date    : Dec 1998 - Sep 2000
+#  @(#) Date    : Nov 2006 by Tatsuyoshi
+#  @(#) Version : 2.4
+#  @(#) Release : 3t
+# ======================================================================
+
+# Directory definition
+INCLUDE_DIR =  include
+SRC_DIR     =  src
+TARGET      =  hi@EXE_PREFIX@
+BINDIR      =  @prefix@/bin
+
+# Other command
+INSTALL    = @INSTALL@
+
+all:
+	cd $(SRC_DIR) && $(MAKE) all
+
+clean:
+	@echo "remove old binaries and dependency files..."
+	rm -rf $(TARGET) core
+	rm -rf $(SRC_DIR)/*.o $(SRC_DIR)/core
+
+distclean:
+	@echo "remove old binaries and dependency files..."
+	rm -rf $(TARGET) core
+	rm -rf $(SRC_DIR)/*.o $(SRC_DIR)/core
+	rm -rf config.status config.cache config.log Makefile $(SRC_DIR)/Makefile
+
+$(TARGET):
+	cd $(SRC_DIR) && $(MAKE) all
+
+install:
+	@echo ""
+	strip $(TARGET)
+	@echo "Installing programme(hi) under $(BINDIR)"
+	$(INSTALL) -m 755 $(TARGET) $(BINDIR)
+	@echo ""
+
+uninstall:
+	@echo ""
+	rm -f $(BINDIR)/$(TARGET)
+	@echo "Uninstalled programme $(ROOT)$(BINDIR)/$(TARGET)."
+	@echo "Please remove this directory. Thanks!"
+	@echo ""

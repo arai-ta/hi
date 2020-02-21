@@ -1,0 +1,76 @@
+dnl Process this file with autoconf to produce a configure script.
+AC_INIT
+
+dnl AC_CANONICAL_HOST
+AC_CYGWIN
+if test $ac_cv_cygwin = yes ; then
+  EXE_PREFIX='.exe'
+fi
+AC_SUBST(EXE_PREFIX)
+
+dnl Checks for programs.
+AC_PROG_CC
+AC_PROG_INSTALL
+AC_PROG_MAKE_SET
+dnl AC_CHECK_PROGS(STRIP, strip, [])
+
+AC_PREFIX_DEFAULT(/usr/local)
+
+dnl Checks for libraries.
+dnl Checks -ltermcap:
+AC_CHECK_LIB(termcap, main,,
+  AC_MSG_ERROR([requires the termcap library]) )
+dnl Checks -lncurses:
+AC_CHECK_LIB(ncurses, main,,
+  AC_MSG_ERROR([requires the ncurses library]) )
+
+dnl Check for typedefs
+dnl AC_CHECK_SIZEOF(int)
+dnl AC_CHECK_SIZEOF(long)
+dnl AC_CHECK_SIZEOF(void *)
+
+dnl Checks for header files.
+AC_HEADER_STDC
+AC_CHECK_HEADERS(getopt.h)
+AC_CHECK_HEADERS(ncurses/ncurses.h,,
+  AC_CHECK_HEADERS(ncurses/curses.h,,
+    AC_CHECK_HEADERS(ncurses.h,,
+      AC_CHECK_HEADERS(curses.h,,
+        AC_MSG_ERROR([requires the ncurses.h/curses.h header]) ))))
+AC_CHECK_HEADERS(unistd.h,,
+  AC_MSG_ERROR([requires the unistd.h header]) )
+AC_CHECK_HEADERS(errno.h,,
+  AC_MSG_ERROR([requires the errno.h header]) )
+AC_CHECK_HEADERS(signal.h,,
+  AC_MSG_ERROR([requires the signal.h header]) )
+AC_CHECK_HEADERS(stdlib.h,,
+  AC_MSG_ERROR([requires the stdlib.h header]) )
+AC_CHECK_HEADERS(string.h,,
+  AC_MSG_ERROR([requires the string.h header]) )
+AC_CHECK_HEADERS(sys/ipc.h,,
+  AC_MSG_ERROR([requires the sys/ipc.h header]) )
+AC_CHECK_HEADERS(sys/shm.h,,
+  AC_MSG_ERROR([requires the sys/shm.h header]) )
+AC_CHECK_HEADERS(sys/stat.h,,
+  AC_MSG_ERROR([requires the sys/stat.h header]) )
+AC_CHECK_HEADERS(sys/types.h,,
+  AC_MSG_ERROR([requires the sys/types.h header]) )
+
+dnl Checks for typedefs, structures, and compiler characteristics.
+AC_C_CONST
+
+dnl Checks for library functions.
+AC_FUNC_MEMCMP
+AC_TYPE_SIGNAL
+AC_CHECK_FUNCS(memset,,
+  AC_MSG_ERROR([requires the memset function]) )
+AC_CHECK_FUNCS(signal,,
+  AC_MSG_ERROR([requires the signal function]) )
+AC_CHECK_FUNCS(strchr,,
+  AC_MSG_ERROR([requires the strchr function]) )
+AC_CHECK_FUNCS(sscanf,,
+  AC_MSG_ERROR([requires the sscanf function]) )
+AC_CHECK_FUNCS(getopt_long)
+AC_CHECK_FUNCS(strlcpy, strlcat)
+
+AC_OUTPUT(src/Makefile Makefile)
